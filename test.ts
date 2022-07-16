@@ -1,5 +1,5 @@
 class Student {
-    constructor(name:string, age: number, isGraduated: boolean) {
+    constructor(name: string, age: number, isGraduated: boolean) {
         this.name = name;
         this.age = age;
         this.isGraduated = isGraduated;
@@ -7,16 +7,13 @@ class Student {
 
     public name: string = '';
     public age: number = 0;
-    public isGraduated: boolean = false;
+    private isGraduated: boolean = false;
 
     public studentFormattedData(): string {
         return 'Nome: ' + this.name + ', Idade: ' + this.age;
     }
 }
 
-const studant = new Student('Henrique', 24, false);
+const student = new Student('Rodolfo', 17, false);
 
-if(studant.isGraduated){
-    const dataFormmated = studant.studentFormattedData();
-    console.log(dataFormmated);
-}
+console.log(student.studentFormattedData());
