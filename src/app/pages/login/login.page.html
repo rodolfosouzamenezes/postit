@@ -15,7 +15,7 @@
 
     <ion-button [class.disabled]="!canLogin()" class="disabled" (click)="login()">
       {{ isLoading ? 'caregando...' : 'confirmar' }}
-      <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="30" [color]="'#fff'"></app-half-circle-spinner>
+      <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="20" [color]="'#fff'"></app-half-circle-spinner>
     </ion-button>
 
     <p>Não possui conta? <a href="">Cadastre-se!</a></p>
