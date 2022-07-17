@@ -4,7 +4,7 @@
   <img class="detail" src="assets/imgs/background.svg">
   
   <div class="container">
-    <app-logo src="assets/imgs/login_logo.svg" [full]="false"></app-logo>
+    <app-logo src="assets/imgs/login_logo.svg" [full]="false" (onClick)="logoClick($event)"></app-logo>
 
     <div class="container--inputs">
       <span>E-mail</span>
