@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { LoginPayload } from 'src/app/models/payloads/login.payload';
+import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -10,48 +9,43 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class LoginPage {
 
+  public loginPayload: LoginPayload = {
+    email: '',
+    password: '',
+  };
+  public isLoading = false;
+
   constructor(
     private readonly helper: HelperService,
   ) { }
 
-  public loginPayload: LoginPayload = {
-    email: '',
-    password: '',
-  }
-
-  public isLoading: boolean = false;
-
   public async login(): Promise<void> {
-    if (!this.canLogin())
-      return;
-
+    if(!this.canLogin()) {return;}
     this.isLoading = true;
 
-    // toast
+    //toast
     await this.helper.showToast('Carregando...');
 
-    // alert
-    await this.helper.showAlert('Hello', [
+    //alert
+    await this.helper.showAlert('Está Logando', [
       {
-        text: 'Ok',
-        handler: () => console.log('Ok!'),
+        text:'CANCELAR',
+        handler: () => { console.log('CANCELAR');},
       },
       {
-        text: 'Outro',
-        handler: () => console.log('Outro!'),
-      }
-    ]);
-
+        text:'OK',
+        handler: () => { console.log('OK');},
+      },
+  ]);
     console.log(this.loginPayload);
   }
 
   public canLogin(): boolean {
     const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
 
-    const emailIsValid = regex.test(this.loginPayload.email)
+    const emailIsValid = regex.test(this.loginPayload.email);
 
-    if (emailIsValid && this.loginPayload.password.length >= 6)
-      return true;
+    if (emailIsValid && this.loginPayload.password.length >= 6) {return true;}
 
     return false;
   }
@@ -59,5 +53,4 @@ export class LoginPage {
   public logoClick($event: boolean): void {
     console.log($event);
   }
-
 }
