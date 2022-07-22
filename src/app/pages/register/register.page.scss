@@ -1,0 +1,99 @@
+.background {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+}
+
+.detail {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.3;
+    object-fit: cover;
+}
+
+.container {
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #fff;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    height: 95vh;
+    transform: translateY(-270px);
+    //animation: 1s ease-out 0s 1 slideInFromTop;
+
+    
+    &--header {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        height: 10%;
+
+        margin-top: 8%;
+
+        ion-img {
+            width: 10vw;
+            height: 6vw;
+        }
+
+        app-logo {
+            width: 10vw;
+            height: 10vw;
+        }
+    }
+
+    &--inputs {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+
+        span {
+            color: #707070;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+            font-size: 0.95rem;
+            padding-left: 1rem;
+        }
+    }
+
+    p {
+        color: #707070;
+        margin-top: 1.5rem;
+        font-size: 0.7rem;
+        width: 70%;
+    }
+
+    p:nth-last-of-type(1) {
+        margin-top: 0;
+    }
+
+    .button {
+        margin-top: 20px;
+    }
+}
+
+.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+app-half-circle-spinner {
+    margin-left: 1rem;
+}
+
+// @keyframes slideInFromTop {
+//     0% {
+//       transform: translateY(-60px);
+//     }
+//     100% {
+//       transform: translateY(-270px);
+//     }
+//   }

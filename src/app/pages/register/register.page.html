@@ -1,0 +1,33 @@
+<div class="login">
+  <img class="background" src="assets/imgs/login_background.png">
+  <img class="detail" src="assets/imgs/background.svg">
+  
+  <div class="container">
+    <div class="container--header">
+      <a href="/login">
+        <ion-img src="assets/imgs/login_backbutton.svg"></ion-img>
+      </a>
+      <app-logo src="assets/imgs/login_logo.svg" [full]="false" (clicked)="logoClick($event)"></app-logo>    
+    </div>
+
+    <div class="container--inputs">
+      <span>Nome completo*</span>
+      <input (keydown.enter)="email.focus()" class="input" type="text">
+      <span>E-mail*</span>
+      <input #email (keydown.enter)="confirmEmail.focus()" class="input" type="text" [(ngModel)]="loginPayload.email">
+      <span>Confirme o E-mail*</span>
+      <input #confirmEmail (keydown.enter)="password.focus()" class="input" type="text" [(ngModel)]="loginPayload.email">
+      <span>Senha*</span>
+      <input #password (keydown.enter)="confirmPassword.focus()" class="input" type="password" [(ngModel)]="loginPayload.password">
+      <span>Confirme a Senha*</span>
+      <input #confirmPassword (keydown.enter)="login()" class="input" type="password" [(ngModel)]="loginPayload.password">
+    </div>
+
+    <P>*Campos obrigatórios</P>
+    <P>Ao registrar-me, concordo com os termos de uso a Política de Privacidade do aplicativo.</P>
+    <ion-button class="button">
+      Criar conta
+      <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="20" [color]="'#fff'"></app-half-circle-spinner>
+    </ion-button>
+  </div>
+</div>
