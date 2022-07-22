@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NavbarEnum } from 'src/app/models/enums/navbar.enum';
 import { NavbarItemInterface } from 'src/app/models/interfaces/navbar-item.interface';
@@ -9,9 +10,10 @@ import { NavbarItemInterface } from 'src/app/models/interfaces/navbar-item.inter
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy{
   public navbarEnum: typeof NavbarEnum = NavbarEnum;
-  public currentNavbar: NavbarEnum = NavbarEnum.HOME;
+  public currentNavbar: NavbarEnum;
+  public routeSubscription: Subscription;
   public navbarList: NavbarItemInterface[] = [
     {
       type: NavbarEnum.FEED,
@@ -36,7 +38,7 @@ export class NavbarComponent {
   constructor(
     private readonly router: Router,
   ) {
-    router.events
+    this.routeSubscription = router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe((route: NavigationEnd) => {
       if (route.url.includes('/feed')) {
@@ -49,5 +51,12 @@ export class NavbarComponent {
         this.currentNavbar = NavbarEnum.PROFILE;
       }
     });
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
   }
 }
