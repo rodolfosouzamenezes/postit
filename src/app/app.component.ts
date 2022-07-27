@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnDestroy {
   public canShowNavbar = false;
-  public routesWithoutNavbar: string[] = ['/login', '/register'];
+  public routesWithoutNavbar: string[] = ['/login'];
   public routeSubscription: Subscription;
 
   constructor(

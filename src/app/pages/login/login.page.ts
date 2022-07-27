@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
+import { RegisterPayload } from 'src/app/models/payloads/register.pyloads';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -13,12 +14,28 @@ export class LoginPage {
     email: '',
     password: '',
   };
+
+  public registerPayload: RegisterPayload= {
+    name: '',
+    email: '',
+    confirmEmail: '',
+    password: '',
+    confirmPassword: '',
+  };
+
+  public showSign = false;
+  public isRegistering = false;
   public isLoading = false;
 
   constructor(
     private readonly helper: HelperService,
-  ) { }
+    ) { }
 
+  public logoClick($event: boolean): void {
+    console.log($event);
+  }
+
+  //LOGIN
   public async login(): Promise<void> {
     if(!this.canLogin()) {return;}
     this.isLoading = true;
@@ -50,7 +67,17 @@ export class LoginPage {
     return false;
   }
 
-  public logoClick($event: boolean): void {
-    console.log($event);
+  //SIGN
+  public async sign() {
+    this.showSign = true;
+    this.isRegistering = true;
+    console.log(this.showSign);
+  }
+
+  public setButtonMessage(): string {
+    if (this.showSign) {
+      return this.isRegistering ? 'carregando...' : 'criar conta';
+    }
+    return (this.isLoading ? 'carregando...' : 'confirmar');
   }
 }

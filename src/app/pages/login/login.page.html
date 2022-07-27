@@ -2,20 +2,43 @@
   <img class="background" src="assets/imgs/login_background.png">
   <img class="detail" src="assets/imgs/background.svg">
   
-  <div class="container">
-    <app-logo src="assets/imgs/login_logo.svg" [full]="false" (clicked)="logoClick($event)"></app-logo>
+  <div class="container" [class.container--sign]="showSign">
+    <div class="container--header" [class.container--header__row]="showSign">
+      <img *ngIf="showSign" (click)="showSign = false" src="assets/imgs/login_backbutton.svg">
+      <app-logo src="assets/imgs/login_logo.svg" [full]="false" (clicked)="logoClick($event)"></app-logo>
+    </div>
 
-    <div class="container--inputs">
+    <div *ngIf="!showSign" class="container--inputs">
       <span>E-mail</span>
       <input (keydown.enter)="password.focus()" class="input" type="text" [(ngModel)]="loginPayload.email">
       <span>Senha</span>
       <input #password (keydown.enter)="login()" class="input" type="password" [(ngModel)]="loginPayload.password">
     </div>
 
+    <div *ngIf="showSign" class="container--inputs">
+      <span>Nome completo*</span>
+      <input (keydown.enter)="email.focus()" class="input" type="text" [(ngModel)]="registerPayload.name">
+
+      <span>E-mail*</span>
+      <input #email (keydown.enter)="confirmEmail.focus()" class="input" type="text" [(ngModel)]="registerPayload.email">
+    
+      <span>Confirme o E-mail*</span>
+      <input #confirmEmail (keydown.enter)="password.focus()" class="input" type="text" [(ngModel)]="registerPayload.confirmEmail">
+      
+      <span>Senha*</span>
+      <input #password (keydown.enter)="confirmPassword.focus()" class="input" type="password" [(ngModel)]="registerPayload.password">
+
+      <span>Confirme a Senha*</span>
+      <input #confirmPassword (keydown.enter)="showSign = true" class="input" type="password" [(ngModel)]="registerPayload.confirmPassword">
+
+      <p>*Campos obrigatórios</p>
+      <p>Ao registrar-me, concordo com os termos de uso a Política de Privacidade do aplicativo.</p>
+    </div>
+
     <ion-button class="button" [class.disabled]="!canLogin()" (click)="login()">
-      {{ isLoading ? 'carregando...' : 'confirmar'}}
+      {{ setButtonMessage() }}
       <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="20" [color]="'#fff'"></app-half-circle-spinner>
     </ion-button>
-    <P>Não possui conta? <a href="/register">Cadastar-se!</a></P>
+    <p *ngIf="!showSign">Não possui conta? <span (click)="showSign = true">Cadastar-se</span></p>
   </div>
 </div>
