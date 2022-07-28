@@ -109,8 +109,8 @@ export class HomePage implements OnInit {
 
     await modal.present();
 
-    modal.onDidDismiss().then(async ({ data: postit }) => {
-
+    modal.onDidDismiss().then(async ({ data: post }) => {
+      console.log(post);
     });
   }
 }
