@@ -10,7 +10,12 @@ import { PostitPayload } from 'src/app/models/payloads/postit.payload';
 })
 export class PostitModalComponent implements OnInit {
   @Input()
-  public color: PostitColorEnum = PostitColorEnum.BLUE;
+  public color: PostitColorEnum;
+
+  @Input()
+  public create = false;
+
+  @Input()
   public postit: PostitPayload = {
     id: 6,
     title: '',
@@ -22,7 +27,11 @@ export class PostitModalComponent implements OnInit {
     private readonly modalController: ModalController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.color) {
+      this.color = this.postit.color;
+    }
+  }
 
   public savePostit(): void {
     this.postit.color = this.color;

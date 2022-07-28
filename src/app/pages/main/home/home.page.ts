@@ -79,12 +79,13 @@ export class HomePage implements OnInit {
     console.log(event);
   }
 
-  public async openNewPostitModal(color: string, ): Promise<void> {
+  public async openNewPostitModal(color: string): Promise<void> {
     const modal = await this.modalController.create({
       component: PostitModalComponent,
       cssClass: 'background-modal',
       componentProps: {
-        color
+        color,
+        create: true
       }
     });
 
@@ -94,6 +95,22 @@ export class HomePage implements OnInit {
       if (postit) {
         this.postitArray.push(postit);
       }
+    });
+  }
+
+  public async openPostitModal(postit: PostitProxy): Promise<void> {
+    const modal = await this.modalController.create({
+      component: PostitModalComponent,
+      cssClass: 'background-modal',
+      componentProps: {
+        postit
+      }
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then(async ({ data: postit }) => {
+
     });
   }
 }
