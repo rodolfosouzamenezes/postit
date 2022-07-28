@@ -13,7 +13,13 @@
     p {
         font-size: .8rem;
         margin-bottom: 1rem;
-        max-height: 19vh;
+        
+        //max-height: 19vh;
         overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 10;
+        line-clamp: 10;
     }
 }

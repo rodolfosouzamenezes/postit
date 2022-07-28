@@ -5,16 +5,34 @@
 
   <main>
     <ng-container *ngFor="let post of postitArray">
-      <app-postit [postit]="post"></app-postit>
+      <app-postit (postitSelected)="printPostit($event)" [postit]="post"></app-postit>
     </ng-container>
   </main>
 
   <div class="home--new-postit">
-    <div class="home--new-postit--item"></div>
-    <div class="home--new-postit--item"></div>
-    <div class="home--new-postit--item"></div>
-    <div class="home--new-postit--item"></div>
-    <div class="home--new-postit--item"></div>
-    <div class="home--new-postit--item"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.RED)"
+    [style.background-color]="postitColorEnum.RED"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.PINK)"
+    [style.background-color]="postitColorEnum.PINK"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.GREEN)"
+    [style.background-color]="postitColorEnum.GREEN"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.YELLOW)"
+    [style.background-color]="postitColorEnum.YELLOW"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.BLUE)"
+    [style.background-color]="postitColorEnum.BLUE"></div>
+    <div 
+    class="home--new-postit--item" 
+    (click)="openNewPostitModal(postitColorEnum.PURPLE)"
+    [style.background-color]="postitColorEnum.PURPLE"></div>
   </div>
 </div>

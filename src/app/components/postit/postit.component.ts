@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
 
 @Component({
@@ -6,12 +6,17 @@ import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
   templateUrl: './postit.component.html',
   styleUrls: ['./postit.component.scss'],
 })
-export class PostitComponent implements OnInit {
+export class PostitComponent {
 
   @Input()
   public postit: PostitProxy;
 
+  @Output()
+  public postitSelected: EventEmitter<PostitProxy> = new EventEmitter<PostitProxy>();
+
   constructor() { }
 
-  ngOnInit() {}
+  public emitPost(): void {
+    this.postitSelected.emit(this.postit);
+  };
 }

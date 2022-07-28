@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
 import { RegisterPayload } from 'src/app/models/payloads/register.pyloads';
 import { HelperService } from 'src/app/services/helper.service';
@@ -29,6 +30,7 @@ export class LoginPage {
 
   constructor(
     private readonly helper: HelperService,
+    private readonly router: Router,
     ) { }
 
   public logoClick($event: boolean): void {
@@ -55,6 +57,7 @@ export class LoginPage {
       },
   ]);
     console.log(this.loginPayload);
+    await this.router.navigate(['/home']);
   }
 
   public canLogin(): boolean {
