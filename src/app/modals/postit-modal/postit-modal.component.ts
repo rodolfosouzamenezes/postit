@@ -36,6 +36,14 @@ export class PostitModalComponent implements OnInit {
   public savePostit(): void {
     this.postit.color = this.color;
     this.modalController.dismiss(this.postit);
+  }
 
+  public deletePostit(): void {
+    this.modalController.dismiss({ postit: this.postit, isDeleted: true });
+
+  }
+
+  public closeModal(): void {
+    this.modalController.dismiss({ postit: this.postit, isDeleted: false });
   }
 }

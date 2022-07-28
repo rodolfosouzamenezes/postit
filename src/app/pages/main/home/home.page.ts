@@ -109,8 +109,11 @@ export class HomePage implements OnInit {
 
     await modal.present();
 
-    modal.onDidDismiss().then(async ({ data: post }) => {
-      console.log(post);
+    modal.onDidDismiss().then(async ({ data }) => {
+      console.log(data.postit);
+      if(data.isDeleted) {
+        this.postitArray = this.postitArray.filter(post => post.id !== data.postit.id);
+      };
     });
   }
 }
