@@ -1,0 +1,46 @@
+.feed {
+    position: absolute;
+    overflow: hidden auto;
+    max-height: 100%;
+    
+    .detail {
+        position: fixed;
+        top: -20px;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    header {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+
+        img {
+            width: 7rem;
+        }
+    }
+
+    main {
+        overflow: hidden auto;
+        width: 100%;
+        padding: 0 1.5rem;
+
+        .feed-item {
+            margin-bottom: 1rem;
+
+            app-feed-item {
+                width: 100%;
+                height: 100%;
+            }
+
+            &:last-child {
+                margin-bottom: 6.5rem;
+            }
+        }
+    }
+}
