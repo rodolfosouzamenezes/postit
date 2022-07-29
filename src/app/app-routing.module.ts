@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/main/feed/feed.module').then( m => m.FeedPageModule)
   },
   {
+    path: 'feed/:id',
+    loadChildren: () => import('./pages/main/feed-detail/feed-detail.module').then( m => m.FeedDetailPageModule)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/main/profile/profile.module').then( m => m.ProfilePageModule)
   },
