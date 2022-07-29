@@ -2,12 +2,12 @@
   <img class="detail" src="assets/imgs/background.svg">
   
   <header>
-    <img class="go-back" src="assets/imgs/go_back.svg">
+    <img class="go-back" src="assets/imgs/go_back.svg" [routerLink]="['/feed']">
     <img class="note-and-friends" src="assets/imgs/logo_and_friend.svg">
   </header>
 
   <main>
-    <div class="feed-item" [style.background-color]="postit.color">
+    <div *ngIf="postit" class="feed-item" [style.background-color]="postit.color">
       <header>
         <ion-avatar class="user--avatar">
           <img src="assets/imgs/user/user-example-1.jpg" alt="">
@@ -32,7 +32,7 @@
           </ng-container>
         </div>
       </main>
-      <footer>
+      <footer [style.background-color]="postit.color">
         <div class="comment--section">
           <input  type="text"
                   placeholder="Inserir cometário">
