@@ -1,0 +1,95 @@
+.profile {
+    width: 100%;
+    overflow: hidden auto;
+    max-height: 100%;
+    
+    .detail {
+        z-index: -1;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        background-image: linear-gradient(to right,#43acb7, #d9f7a0);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+        background-color: #fff;
+        transform: translateY(65px);
+        box-shadow: 0 0 10px #707070;
+
+        .p--container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            text-transform: capitalize;
+
+            &--menu {
+                position: fixed;
+                right: 1.5rem;
+                top: 3rem;
+            }
+
+            &--avatar {
+                transform: translateY(-28px);
+                border: 10px solid #fff;
+                height: 6.8rem;
+                width: 6.8rem;
+            }
+
+            &--name {
+                color: #343434;
+                font-weight: bold;
+                font-size: 1.26rem;
+                transform: translateY(-35px);
+            }
+
+            &--role {
+                color: #707070;
+                font-weight: 600;
+                font-size: .7rem;
+                margin-top: -38px;
+            }
+        }
+
+        .n--container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 1.5rem;
+
+            &--title {
+                padding: 1.3rem 0;
+                text-transform: uppercase;
+                color: #343434;
+                font-weight: bold;
+                font-size: 1.35rem;
+            }
+        }
+    }
+
+    main {
+        overflow: hidden auto;
+        width: 100%;
+
+        .profile-item {
+            margin-bottom: 1rem;
+
+            app-profile-item {
+                width: 100%;
+                height: 100%;
+            }
+
+            &:last-child {
+                margin-bottom: 6.5rem;
+            }
+        }
+    }
+}

@@ -2,7 +2,9 @@
     position: absolute;
     overflow: hidden auto;
     max-height: 100%;
-    
+    padding: 0 1.5rem;
+
+
     .detail {
         position: fixed;
         top: -20px;
@@ -27,11 +29,15 @@
 
     main {
         overflow: hidden auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
-        padding: 0 1.5rem;
 
         .feed-item {
             margin-bottom: 1rem;
+            width: 100%;
+
 
             app-feed-item {
                 width: 100%;

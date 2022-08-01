@@ -1,9 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="profile">
+  <img class="detail" src="assets/imgs/background.svg">
 
-<ion-content>
+  <div class="container">
+    <div class="p--container">
+      <img class="p--container--menu" src="assets/imgs/hamburger_menu.svg">
+      <ion-avatar class="p--container--avatar">
+        <img src="assets/imgs/user/user-example-1.jpg" alt="">
+      </ion-avatar>
+      <span class="p--container--name">Cristian Perosa</span>
+      <span class="p--container--role">Fisioterapeuta Esportivo</span>
+    </div>
+    <div class="n--container">
+      <span class="n--container--title">notas públicas</span>
 
-</ion-content>
+      <main>
+        <ng-container *ngFor="let post of postitArray">
+          <div class="profile-item">
+            <app-profile-item [postit]="post"></app-profile-item>
+          </div>
+        </ng-container>
+      </main>
+    </div>
+  </div>
+</div>

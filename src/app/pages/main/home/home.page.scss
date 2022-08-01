@@ -73,4 +73,9 @@
             transform-origin: bottom left;
         }
     }
+
+    .selected-postit {
+        background-color: none;
+        box-shadow: none;
+    }
 }
