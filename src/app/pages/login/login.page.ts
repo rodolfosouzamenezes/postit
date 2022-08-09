@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
 import { RegisterPayload } from 'src/app/models/payloads/register.pyloads';
+import { HttpAsyncService } from 'src/app/modules/http-async/service/http-async.service';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class LoginPage {
   constructor(
     private readonly helper: HelperService,
     private readonly router: Router,
+    private readonly http: HttpAsyncService,
     ) { }
 
   public logoClick($event: boolean): void {
