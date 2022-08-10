@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ipiBaseUrl: 'https://api-postit-app.herokuapp.com',
 };

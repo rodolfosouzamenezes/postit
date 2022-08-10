@@ -41,6 +41,11 @@ export class LoginPage {
 
   //LOGIN
   public async login(): Promise<void> {
+    const [ token, error ] = await this.http.post('/auth/login', { username: 'test', password: 'test' });
+
+    console.log(token);
+    console.log(error);
+
     if(!this.canLogin()) {return;}
     this.isLoading = true;
 
