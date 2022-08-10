@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
 import { RegisterPayload } from 'src/app/models/payloads/register.pyloads';
-import { HttpAsyncService } from 'src/app/modules/http-async/service/http-async.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class LoginPage {
   constructor(
     private readonly helper: HelperService,
     private readonly router: Router,
-    private readonly http: HttpAsyncService,
+    private readonly auth: AuthService,
     ) { }
 
   public logoClick($event: boolean): void {
@@ -41,30 +41,18 @@ export class LoginPage {
 
   //LOGIN
   public async login(): Promise<void> {
-    const [ token, error ] = await this.http.post('/auth/login', { username: 'test', password: 'test' });
-
-    console.log(token);
-    console.log(error);
-
     if(!this.canLogin()) {return;}
-    this.isLoading = true;
 
-    //toast
-    await this.helper.showToast('Carregando...');
+    this.isLoading = true;
+    const [isSuccess, message] = await this.auth.login(this.loginPayload.email, this.loginPayload.password);
+    this.isLoading = false;
+
+    if (isSuccess) {
+      return void await this.router.navigate(['/home']);
+    }
 
     //alert
-    await this.helper.showAlert('Está Logando', [
-      {
-        text:'CANCELAR',
-        handler: () => { console.log('CANCELAR');},
-      },
-      {
-        text:'OK',
-        handler: () => { console.log('OK');},
-      },
-  ]);
-    console.log(this.loginPayload);
-    await this.router.navigate(['/home']);
+    await this.helper.showToast(message, 5_000);
   }
 
   public canLogin(): boolean {
