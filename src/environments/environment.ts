@@ -5,6 +5,9 @@
 export const environment = {
   production: false,
   ipiBaseUrl: 'https://api-postit-app.herokuapp.com',
+  keys: {
+    token: '@postit/token',
+  },
 };
 
 /*
