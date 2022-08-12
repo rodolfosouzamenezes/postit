@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { apiRoutes } from 'src/environments/api-routes';
 import { environment } from 'src/environments/environment';
-import { TokenProxy } from '../models/payloads/token.proxy';
+import { AsyncResult } from '../models/interfaces/async-result';
+import { CreateUserPayload } from '../models/payloads/create-user.payload';
+import { TokenProxy } from '../models/proxies/token.proxy';
+import { UserProxy } from '../models/proxies/user.proxy';
 import { HttpAsyncService } from '../modules/http-async/service/http-async.service';
 
 @Injectable({
@@ -12,7 +15,7 @@ export class AuthService {
   public async login(
       username: string,
       password: string,
-    ): Promise<[isSuccess: boolean, erroMessage: string | undefined]> {
+    ): Promise<AsyncResult<boolean>> {
     const [ token,  error ] = await this.http.post<TokenProxy>(apiRoutes.auth.login, {
       username,
       password,
@@ -25,5 +28,17 @@ export class AuthService {
     localStorage.setItem(environment.keys.token, token.token);
 
     return [true, 'Bem-vindo de volta!'];
+  }
+
+  public async register(payload: CreateUserPayload): Promise<AsyncResult<boolean>> {
+    const [user, error] = await this.http.post<UserProxy>(apiRoutes.users.create, payload);
+
+    if(error) {
+      return [ false, error.error.message ];
+    }
+
+    localStorage.setItem(environment.keys.user, JSON.stringify(user));
+
+    return this.login(payload.email, payload.password);
   }
 }

@@ -35,10 +35,16 @@
       <p>Ao registrar-me, concordo com os termos de uso a Política de Privacidade do aplicativo.</p>
     </div>
 
-    <ion-button class="button" [disabled]="isLoading || !canLogin()" (click)="login()">
+    <ion-button *ngIf="!showSign" class="button" [disabled]="isLoading || !canLogin()" (click)="login()">
       {{ setButtonMessage() }}
       <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="20" [color]="'#fff'"></app-half-circle-spinner>
     </ion-button>
+
+    <ion-button *ngIf="showSign" class="button" [disabled]="isLoading || !canRegister()" (click)="register()">
+      {{ setButtonMessage() }}
+      <app-half-circle-spinner *ngIf="isLoading" [animationDuration]="1000" [size]="20" [color]="'#fff'"></app-half-circle-spinner>
+    </ion-button>
+    
     <p *ngIf="!showSign">Não possui conta? <span (click)="showSign = true">Cadastar-se</span></p>
   </div>
 </div>

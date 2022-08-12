@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginPayload } from 'src/app/models/payloads/login.pyloads';
-import { RegisterPayload } from 'src/app/models/payloads/register.pyloads';
+import { RegisterPayload } from 'src/app/models/payloads/create-user.payload';
+import { LoginPayload } from 'src/app/models/payloads/login.payload';
 import { AuthService } from 'src/app/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 
@@ -17,7 +17,7 @@ export class LoginPage {
     password: '',
   };
 
-  public registerPayload: RegisterPayload= {
+  public registerPayload: RegisterPayload = {
     name: '',
     email: '',
     confirmEmail: '',
@@ -70,6 +70,37 @@ export class LoginPage {
     this.showSign = true;
     this.isRegistering = true;
     console.log(this.showSign);
+  };
+
+  public async register(): Promise<void> {
+    if(!this.canRegister()) {return;}
+
+    this.isLoading = true;
+    const [isSuccess, message] = await this.auth.register(this.registerPayload);
+    this.isLoading = false;
+
+    if (isSuccess) {
+      return void await this.router.navigate(['/home']);
+    }
+
+    //alert
+    await this.helper.showToast(message, 5_000);
+  }
+
+  public canRegister(): boolean {
+    const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
+
+    if(this.registerPayload.name.trim().length<=0) {return false;}
+
+    if(!regex.test(this.registerPayload.email)) {return false;}
+
+    if(this.registerPayload.email !== this.registerPayload.confirmEmail){return false;}
+
+    if(this.registerPayload.password.length < 6) {return false;}
+
+    if(this.registerPayload.password !== this.registerPayload.confirmPassword) {return false;}
+
+    return true;
   }
 
   public setButtonMessage(): string {
