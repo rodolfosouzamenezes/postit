@@ -6,12 +6,13 @@ import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
 import { NoteService } from 'src/app/modules/http-async/service/note.service';
 import { HelperService } from 'src/app/services/helper.service';
 
+//02:54
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   public isLoading: boolean = false;
 
@@ -25,7 +26,7 @@ export class HomePage implements OnInit {
     private readonly helper: HelperService,
   ) {}
 
-  public async ngOnInit(): Promise<void> {
+  public async ionViewDidEnter(): Promise<void> {
     await this.loadMyNotes();
   }
 
