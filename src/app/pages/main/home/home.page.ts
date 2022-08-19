@@ -44,7 +44,9 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: PostitModalComponent,
       cssClass: 'background-modal',
+      backdropDismiss: true,
       componentProps: {
+        color,
         create: true
       }
     });
