@@ -10,8 +10,5 @@ export class CommentComponent implements OnInit {
   @Input()
     public comment: CommentProxy;
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  public ngOnInit(): void {}
 }

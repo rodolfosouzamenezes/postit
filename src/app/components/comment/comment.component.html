@@ -1,10 +1,10 @@
 <div class="comment">
   <ion-avatar class="user--avatar">
-    <img src="assets/imgs/user/user-example-3.jpg" alt="">
+    <img [src]="comment.user?.imageUrl || 'assets/imgs/user/user-example-3.jpg'" alt="">
   </ion-avatar>
   <div class="comment--info">
     <span class="comment--info--user--name">
-      Maria Luiza
+      {{ comment.user?.name }}
     </span>
     <span>
       {{ comment.comment }}

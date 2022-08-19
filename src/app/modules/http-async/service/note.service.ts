@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { AsyncResult } from 'src/app/models/interfaces/async-result';
 import { PostitPayload } from 'src/app/models/payloads/postit.payload';
+import { CommentProxy } from 'src/app/models/proxies/comment.proxy';
 import { FeedPostitProxy } from 'src/app/models/proxies/feed-postit.proxy';
 import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
 import { apiRoutes } from 'src/environments/api-routes';
@@ -79,5 +79,25 @@ export class NoteService {
     if (error) {return [false, error.error.message];};
 
     return [true];
+  }
+
+  public async get(id: number): Promise<AsyncResult<FeedPostitProxy>> {
+    const url = apiRoutes.notes.get.replace('{noteId}', id.toString());
+    const [success, error] = await this.http.get<FeedPostitProxy>(url);
+
+    if (error) {return [null, error.error.message];};
+
+    return [success];
+  }
+
+  public async sendComment(id: number, commentText: string): Promise<AsyncResult<CommentProxy>> {
+    const url = apiRoutes.notes.comment.create
+    .replace('{noteId}', id.toString());
+
+    const [success, error] = await this.http.post<CommentProxy>(url, { comment: commentText});
+
+    if (error) {return [null, error.error.message];};
+
+    return [success];
   }
 }

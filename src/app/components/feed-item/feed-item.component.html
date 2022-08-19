@@ -1,11 +1,11 @@
 <div class="feed-item" [style.background]="postit.color">
   <header>
     <ion-avatar class="user--avatar">
-      <img src="assets/imgs/user/user-example-1.jpg" alt="">
+      <img [src]="postit.user?.imageUrl || 'assets/imgs/user/user-example-1.jpg'" alt="">
     </ion-avatar>
     <div class="user--info">
-      <span class="user--info--name">Beatriz Toledo</span>
-      <span class="user--info--role">Psicóloga</span>
+      <span class="user--info--name">{{ postit.user?.name }}</span>
+      <span class="user--info--role">{{ postit.user?.role }}</span>
     </div>
     <button class="read--more" type="button" [routerLink]="['/feed',postit.id]">
       Ler mais +
@@ -21,9 +21,10 @@
   </main>
   <footer>
     <div class="comment--section">
-      <input  type="text"
+      <input  [(ngModel)]="commentText"
+              type="text"
               placeholder="Inserir cometário">
-      <button type="button">Publicar</button>
+      <button type="button" [disabled]="isLoading" (click)="sendComment()">Publicar</button>
     </div>
     <div class="actions--section">
       <img src="assets/imgs/postit_comment.svg" [routerLink]="['/feed',postit.id]">
@@ -31,6 +32,7 @@
         <svg 
           (click)="setLikeOnToPostIt(postit)"
           class="heart" [class.heart--filled]="postit.hasLiked"
+          [class.disabled]="isLoading"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.685 17.159">
           <g data-name="Icon ionic-ios-heart">
             <path 

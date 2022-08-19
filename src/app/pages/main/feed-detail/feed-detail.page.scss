@@ -53,6 +53,10 @@
                 .user--avatar {
                     width: 3rem;
                     height: 3rem;
+
+                    img {
+                        object-fit: cover;
+                    }
                 }
             
                 .user--info {
@@ -116,7 +120,6 @@
             
             footer {
                 display: flex;
-                position: fixed;
                 bottom: 9rem;
                 height: 2rem;
             
@@ -155,5 +158,25 @@
                 }
             }
         }
+    }
+}
+.disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.heart {
+    width: 1.3rem;
+    height: 1.3rem;
+
+    &--filled {
+        transform: translateZ(0);
+        --heart-scale: 1;
+    }
+
+    &--core {
+        transition: cubic-bezier(0.83, 0, 0.17, 1) .8s transform;
+        transform: scale(var(--heart-scale, 0));
+        transform-origin: center center;
     }
 }

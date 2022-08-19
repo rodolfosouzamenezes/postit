@@ -10,7 +10,7 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class FeedPage {
   public postitArray: FeedPostitProxy[] = [];
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   constructor(
     private readonly note: NoteService,
