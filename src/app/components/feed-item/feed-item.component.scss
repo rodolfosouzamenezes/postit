@@ -1,19 +1,19 @@
-.feed-item  {
+.feed-item {
     background-color: #D7DF6B;
     width: 100%;
     z-index: 100;
     padding: 1rem;
-    
+
     header {
         display: flex;
         align-items: center;
         width: 100%;
-    
+
         .user--avatar {
             width: 3rem;
             height: 3rem;
         }
-    
+
         .user--info {
             flex: 1;
             display: flex;
@@ -25,19 +25,19 @@
             span {
                 color: #4E4E4E;
             }
-    
+
             &--name {
                 font-size: .95rem;
                 font-style: italic;
                 font-weight: 600;
             }
-    
+
             &--role {
                 font-size: .68rem;
                 font-weight: 500;
             }
         }
-    
+
         .read--more {
             margin-top: -.8rem;
             font-size: .81rem;
@@ -45,11 +45,11 @@
             border: none;
             font-weight: bold;
             text-align: end;
-    
+
             color: #4E4E4E;
         }
     }
-    
+
     main {
         color: #4E4E4E;
         width: 100%;
@@ -59,7 +59,7 @@
         .title {
             padding: .6rem 0 1.5rem 0;
             font-size: 1.18rem;
-            font-weight: 500;  
+            font-weight: 500;
         }
 
         .annotation {
@@ -72,12 +72,12 @@
             line-clamp: 7;
         }
     }
-    
+
     footer {
         display: flex;
-    
+
         .comment--section {
-            flex: 1;    
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -100,18 +100,36 @@
                 font-size: .82rem;
             }
         }
-    
+
         .actions--section {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 4.5rem;
             padding-left: 1rem;
-        
+
             img {
                 width: 1.3rem;
                 height: 1.3rem;
             }
+
+
+        }
+    }
+
+    .heart {
+        width: 1.3rem;
+        height: 1.3rem;
+
+        &--filled {
+            transform: translateZ(0);
+            --heart-scale: 1;
+        }
+
+        &--core {
+            transition: cubic-bezier(0.83, 0, 0.17, 1) .8s transform;
+            transform: scale(var(--heart-scale, 0));
+            transform-origin: center center;
         }
     }
 }
