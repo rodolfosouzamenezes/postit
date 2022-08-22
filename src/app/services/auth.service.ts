@@ -26,6 +26,7 @@ export class AuthService {
     }
 
     localStorage.setItem(environment.keys.token, token.token);
+    localStorage.setItem(environment.keys.user, token.userId.toString());
 
     return [true, 'Bem-vindo de volta!'];
   }
