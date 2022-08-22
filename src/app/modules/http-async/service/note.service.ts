@@ -5,6 +5,7 @@ import { CommentProxy } from 'src/app/models/proxies/comment.proxy';
 import { FeedPostitProxy } from 'src/app/models/proxies/feed-postit.proxy';
 import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
 import { apiRoutes } from 'src/environments/api-routes';
+import { environment } from 'src/environments/environment';
 import { HttpAsyncService } from './http-async.service';
 
 @Injectable({
@@ -19,6 +20,15 @@ export class NoteService {
     const [success, error] = await this.http.get<PostitProxy[]>(
       apiRoutes.notes.me
     );
+
+    if (error) { return [[], error.error.message]; }
+
+    return [success];
+  }
+
+  public async getMyPublicNotes(): Promise<AsyncResult<PostitProxy[]>> {
+    const url = apiRoutes.notes.mypublicNotes.replace('{userId}', localStorage.getItem(environment.keys.user).toString());
+    const [success, error] = await this.http.get<PostitProxy[]>(url);
 
     if (error) { return [[], error.error.message]; }
 

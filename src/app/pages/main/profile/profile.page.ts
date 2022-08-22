@@ -1,66 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { PostitColorEnum } from 'src/app/models/enums/postit-color.enum';
 import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
+import { UserProxy } from 'src/app/models/proxies/user.proxy';
+import { NoteService } from 'src/app/modules/http-async/service/note.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { UserServise } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
-  public postitArray: PostitProxy[] = [
-    {
-      id: 0,
-      title: 'Alongamento para atletas',
-      annotation: 'Paragraph porttitor libero a metus mollis, a condimentum enim dignissim. Phasellus feugiat risus in odio imperdiet, at convallis dolor venenatis. Ut eu interdum nulla. Orci varius natoque penatibus et magnis dis parturient montes,',
-      color: PostitColorEnum.GREEN,
-    },
-    {
-      id: 1,
-      title: 'Como ter uma rotina',
-      annotation: 'Paragraph porttitor libero a metus mollis, a condimentum enim dignissim. Phasellus feugiat risus in odio imperdiet, at convallis dolor venenatis. Ut eu interdum nulla. Orci varius natoque penatibus et magnis dis parturient montesr',
-      color: PostitColorEnum.YELLOW,
-    },
-    {
-      id: 2,
-      title: 'Titulo do post 2',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender',
-      color: PostitColorEnum.RED,
-    },
-    {
-      id: 3,
-      title: 'Titulo do post 3',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender',
-      color: PostitColorEnum.PINK,
-    },
-    {
-      id: 4,
-      title: 'Titulo do post 4',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender',
-      color: PostitColorEnum.PURPLE,
-    },
-    {
-      id: 5,
-      title: 'Titulo do post 5',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender',
-      color: PostitColorEnum.RED,
-    },
-    {
-      id: 6,
-      title: 'Titulo do post 6',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender Lorem Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender Lorem',
-      color: PostitColorEnum.BLUE,
-    },
-    {
-      id: 7,
-      title: 'Titulo do post 7',
-      annotation: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, itaque! Consectetur dolores praesentium reprehender',
-      color: PostitColorEnum.GREEN,
-    },
-  ];
-  constructor() { }
+export class ProfilePage {
+  public postitArray: PostitProxy[] = [];
+  public isLoading = false;
+  public myUser: UserProxy;
 
-  ngOnInit() {
+  constructor(
+    public readonly note: NoteService,
+    public readonly user: UserServise,
+    public readonly helper: HelperService,
+    ) { }
+
+  public async ionViewDidEnter(): Promise<void> {
+    await this.loadMyNotes();
+    await this.getMyUser();
+  }
+
+  public async loadMyNotes(): Promise<void> {
+    this.isLoading = true;
+    const [notes, errorMessage] = await this.note.getMyPublicNotes();
+    this.isLoading = false;
+
+    if (errorMessage) {return this.helper.showToast(errorMessage, 5_000);}
+
+    this.postitArray = notes;
+  }
+
+  public async getMyUser(): Promise<void> {
+    this.isLoading = true;
+    const [user, errorMessage] = await this.user.getUser(+localStorage.getItem(environment.keys.user));
+    this.isLoading = false;
+
+    if (errorMessage) {return this.helper.showToast(errorMessage, 5_000);}
+
+    this.myUser = user;
   }
 
 }

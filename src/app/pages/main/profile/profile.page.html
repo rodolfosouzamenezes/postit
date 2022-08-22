@@ -5,10 +5,10 @@
     <div class="p--container">
       <img class="p--container--menu" src="assets/imgs/hamburger_menu.svg">
       <ion-avatar class="p--container--avatar">
-        <img src="assets/imgs/user/user-example-1.jpg" alt="">
+        <img [src]="myUser?.imageUrl || 'assets/imgs/user/user-example-1.jpg'" alt="">
       </ion-avatar>
-      <span class="p--container--name">Cristian Perosa</span>
-      <span class="p--container--role">Fisioterapeuta Esportivo</span>
+      <span class="p--container--name">{{ myUser?.name }}</span>
+      <span class="p--container--role">{{ myUser?.role }}</span>
     </div>
     <div class="n--container">
       <span class="n--container--title">notas públicas</span>
