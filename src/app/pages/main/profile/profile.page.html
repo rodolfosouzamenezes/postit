@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="p--container">
-      <img class="p--container--menu" src="assets/imgs/hamburger_menu.svg">
+      <img id="hamburger" (click)="isSettingsEnabled = true" class="p--container--menu" src="assets/imgs/hamburger_menu.svg">
       <ion-avatar class="p--container--avatar">
         <img [src]="myUser?.imageUrl || 'assets/imgs/user/user-example-1.jpg'" alt="">
       </ion-avatar>
@@ -23,3 +23,32 @@
     </div>
   </div>
 </div>
+
+<section
+  class="config"
+  [class.settings-enable]="isSettingsEnabled">
+  <header>
+
+    <ion-icon class="config--backbutton"
+     name="arrow-back-outline"
+     (click)="isSettingsEnabled = false"
+     ></ion-icon>
+
+    <span><b>Ajustes</b></span>
+  </header>
+
+  <div class="config--list">
+  <p (click)="clickConfigList(0)">Ajustes</p>
+  <p (click)="clickConfigList(1)">Ajustes</p>
+  <p (click)="clickConfigList(2)">Ajustes</p>
+  <p (click)="clickConfigList(3)">Sair</p>
+  </div>
+
+  <footer>
+    <img src="assets/imgs/login_logo.svg" alt="">
+  </footer>
+
+</section>
+
+
+<div class="brightness" [class.settings-enable--brightness]="isSettingsEnabled"></div>

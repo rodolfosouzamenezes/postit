@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostitColorEnum } from 'src/app/models/enums/postit-color.enum';
 import { PostitProxy } from 'src/app/models/proxies/postit.proxy';
 import { UserProxy } from 'src/app/models/proxies/user.proxy';
@@ -21,6 +22,7 @@ export class ProfilePage {
     public readonly note: NoteService,
     public readonly user: UserServise,
     public readonly helper: HelperService,
+    public readonly router: Router,
     ) { }
 
   public async ionViewDidEnter(): Promise<void> {
@@ -46,6 +48,22 @@ export class ProfilePage {
     if (errorMessage) {return this.helper.showToast(errorMessage, 5_000);}
 
     this.myUser = user;
+  }
+
+  public async clickConfigList(index: 0 | 1 | 2 | 3): Promise<void> {
+    switch (index) {
+      case 1 : {
+        break;
+      }
+      case 2 : {
+        break;
+      }
+      case 3 : {
+        localStorage.clear();
+        await this.router.navigate(['/login']);
+        break;
+      }
+    }
   }
 
 }
