@@ -12,10 +12,10 @@ export class HelperService {
 
     }
 
-    public async showToast(message: string, duration: number = 2000): Promise<void> {
+    public async showToast(message: string, durationInMilleseconds: number = 2000): Promise<void> {
         const toast = await this.toastController.create({
             message,
-            duration,
+            duration: durationInMilleseconds,
           });
           toast.present();
     }
