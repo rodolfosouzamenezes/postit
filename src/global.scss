@@ -57,4 +57,8 @@
 
 .background-modal {
     --background: transparent;
+
+    //{@link https://forum.ionicframework.com/t/cannot-dismiss-a-modal-by-clicking-the-backdrop-ionic-6/221459}
+    --height: 65vh;
+    --width: 89vw;
 }
